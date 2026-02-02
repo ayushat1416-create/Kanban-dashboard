@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kanban Task Board
 
-## Getting Started
+This is a simple Kanban style task management application (similar to Trello).
+The goal of this project is to manage tasks using drag and drop between
+three columns: To Do, In Progress, and Done.
 
-First, run the development server:
+I built this as a mini project for my internship to practice React, Next.js,
+and working with state management and UI interactions.
+
+## Features
+
+- Three columns: To Do, In Progress, Done  
+- Drag and drop tasks between columns  
+- Reorder tasks inside the same column  
+- Add new tasks  
+- Edit existing tasks  
+- Delete tasks  
+- Data is saved in browser localStorage  
+- Clean and simple UI using Tailwind CSS  
+
+## Tech Stack
+
+- Next.js (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+- dnd-kit
+
+## How to Run the Project
+
+1. Clone the repository
 
 ```bash
+git clone https://github.com/ayushat1416-create/Kanban-dashboard.git
+cd Kanban-dashboard
+
+2. Install dependencies
+
+npm install
+
+
+3. Start the development server
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Then open:
+http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+How It Works
 
-## Learn More
+The board state is stored in browser localStorage.
+When the app loads:
 
-To learn more about Next.js, take a look at the following resources:
+If saved data exists, it loads from localStorage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Otherwise it loads default data from initialData.ts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This way tasks are not lost after refresh
 
-## Deploy on Vercel
+Folder Structure
+app/
+  page.tsx
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+components/
+  Board.tsx
+  Column.tsx
+  TaskCard.tsx
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+lib/
+  initialData.ts
+  storage.ts
