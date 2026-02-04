@@ -27,7 +27,7 @@ export default function Column({ column, onAddTask, onDeleteTask, onEditTask, }:
   }
 
   return (
-    <div className="w-80 bg-white rounded-2xl shadow-lg p-5 flex-shrink-0 border border-slate-200 hover:shadow-xl transition-shadow duration-300">
+    <div className="w-80 bg-white rounded-2xl shadow-lg p-5 flex-shrink-0 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
       <div className="mb-4 pb-4 border-b-2 border-blue-100 flex items-start justify-between gap-3">
         <div>
           <h3 className="font-bold text-lg text-slate-800">{column.title}</h3>
