@@ -17,7 +17,7 @@ and working with state management and UI interactions.
 - Delete tasks  
 - Data is saved in browser localStorage  
 - Clean and simple UI using Tailwind CSS  
-
+- Subtle hover animations for a smoother UI 
 ## Tech Stack
 
 - Next.js (App Router)

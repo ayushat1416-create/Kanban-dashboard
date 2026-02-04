@@ -1,3 +1,4 @@
+import React from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
@@ -9,46 +10,43 @@ interface Props {
   onEdit?: (id: string, content: string) => void;
 }
 
-
 export default function TaskCard({ id, content, isOverlay, onDelete, onEdit }: Props) {
-
-  // ✅ Hook is always called (rules-of-hooks safe)
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging
-  } = useSortable({
-    id,
-    // Overlay should not be draggable
-    disabled: !!isOverlay
-  });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
+    useSortable({
+      id,
+      disabled: !!isOverlay,
+    });
 
   const style: React.CSSProperties = {
     transform: CSS.Transform.toString(transform),
-    transition
+    transition,
   };
 
-  
-
-  return (   
-    
+  return (
     <div
       ref={setNodeRef}
       style={style}
-      // ✅ Only attach drag handlers when NOT overlay
+      // ✅ attributes can stay on the root
       {...(!isOverlay ? attributes : {})}
-      {...(!isOverlay ? listeners : {})}
       className={`
         bg-gradient-to-br from-white to-blue-50 rounded-lg p-4 shadow-md
         border-2 ${isOverlay ? "border-blue-400 shadow-xl" : "border-blue-200 hover:border-blue-400"}
-        ${isOverlay ? "" : "cursor-grab active:cursor-grabbing hover:shadow-lg hover:-translate-y-1"}
-        transition-all duration-200 select-none touch-none
+        transition-all duration-200 select-none
+        ${!isOverlay ? "hover:shadow-lg hover:-translate-y-1" : ""}
         ${!isOverlay && isDragging ? "opacity-40" : ""}
       `}
     >
+      {/* ✅ Drag handle (only this part starts drag) */}
+      {!isOverlay && (
+        <div
+          {...listeners}
+          className="mb-2 flex items-center justify-between cursor-grab active:cursor-grabbing touch-none"
+        >
+          <span className="text-xs text-slate-400">Drag</span>
+          <span className="text-slate-300">⋮⋮</span>
+        </div>
+      )}
+
       <p className="text-sm text-slate-700 font-medium leading-relaxed">
         {content}
       </p>
@@ -60,8 +58,7 @@ export default function TaskCard({ id, content, isOverlay, onDelete, onEdit }: P
         </span>
       </div>
 
-
-      {/*  Edit / Delete only when not overlay */}
+      {/* ✅ Buttons are now fully clickable */}
       {!isOverlay && (
         <div className="mt-3 flex justify-end gap-2">
           <button
@@ -97,7 +94,5 @@ export default function TaskCard({ id, content, isOverlay, onDelete, onEdit }: P
         </div>
       )}
     </div>
-
-    
   );
 }
